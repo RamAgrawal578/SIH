@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare - Student Mental Health Support</title>
+  <style>
+    /* ====== GLOBAL ====== */
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#667eea,#764ba2);
+      color:#374151; line-height:1.6;
+    }
+    .container{max-width:1200px;margin:auto;padding:0 20px;}
+    h2{margin-bottom:1rem;}
+
+    /* ====== NAV ====== */
+    nav {
+      position:fixed;top:0;left:0;width:100%;
+      background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);
+      z-index:1000;
+    }
+    .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;}
+    .logo{font-size:1.5rem;font-weight:bold;color:#4f46e5;}
+    .nav-links{display:flex;gap:1rem;}
+    .nav-links a{color:#374151;text-decoration:none;font-weight:500;}
+    .emergency-btn{background:#ef4444;color:#fff;border:none;padding:.5rem 1rem;border-radius:20px;cursor:pointer;}
+
+    /* ====== HERO ====== */
+    .hero{margin-top:80px;text-align:center;padding:4rem 1rem;color:#fff;}
+    .btn{padding:.75rem 1.5rem;border:none;border-radius:30px;cursor:pointer;font-weight:bold;}
+    .btn-primary{background:#fff;color:#4f46e5;}
+    .btn-secondary{background:transparent;color:#fff;border:2px solid #fff;}
+
+    /* ====== FEATURES ====== */
+    .features{background:#fff;padding:2rem;border-radius:20px;margin:2rem 0;}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+    .feature-card{background:#f3f4f6;padding:1.5rem;border-radius:15px;text-align:center;cursor:pointer;transition:.3s;}
+    .feature-card:hover{background:#4f46e5;color:#fff;}
+
+    /* ====== BOOKING ====== */
+    .booking-section,.resources-section,.forum-section,.assessment-section,.admin-section {
+      background:#fff;padding:2rem;border-radius:20px;margin:2rem 0;
+    }
+    .booking-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+    .booking-form input,.booking-form select,.booking-form textarea{
+      padding:.5rem;border:1px solid #ccc;border-radius:8px;
+    }
+
+    /* ====== CHATBOT ====== */
+    .chatbot-container{position:fixed;bottom:20px;right:20px;}
+    .chatbot-toggle{width:60px;height:60px;border-radius:50%;border:none;background:#4f46e5;color:#fff;font-size:1.5rem;cursor:pointer;}
+    .chatbot-window{display:none;flex-direction:column;position:absolute;bottom:70px;right:0;width:300px;height:400px;background:#fff;border-radius:15px;box-shadow:0 4px 20px rgba(0,0,0,.2);}
+    .chatbot-window.active{display:flex;}
+    .chatbot-messages{flex:1;overflow-y:auto;padding:1rem;}
+    .message{margin-bottom:1rem;}
+    .message.user{text-align:right;}
+    .chatbot-input{display:flex;border-top:1px solid #ccc;}
+    .chatbot-input input{flex:1;padding:.5rem;border:none;outline:none;}
+    .chatbot-input button{padding:.5rem 1rem;border:none;background:#4f46e5;color:#fff;cursor:pointer;}
+
+    /* ====== FOOTER ====== */
+    footer{background:#fff;padding:2rem;margin-top:2rem;border-radius:20px 20px 0 0;}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+    .footer-section ul{list-style:none;}
+
+    @media(max-width:768px){.nav-links{display:none;}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">MindCare</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#assessment">Self-Assessment</a>
+        <a href="#booking">Book Session</a>
+        <a href="#resources">Resources</a>
+        <a href="#forum">Forum</a>
+        <a href="#admin">Admin</a>
+        <button class="emergency-btn" onclick="showEmergencyModal()">🚨 Help</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <h1>Your Mental Health Matters</h1>
+    <p>Confidential, accessible and stigma-free support</p>
+    <button class="btn btn-primary" onclick="startPHQ9()">Take PHQ-9 Test</button>
+    <button class="btn btn-secondary" onclick="toggleChat()">Chat with AI</button>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="container">
+    <div class="features">
+      <h2>Our Services</h2>
+      <div class="features-grid">
+        <div class="feature-card" onclick="toggleChat()">💬 AI Chat</div>
+        <div class="feature-card" onclick="document.getElementById('booking').scrollIntoView()">📅 Book Session</div>
+        <div class="feature-card" onclick="startPHQ9()">📊 Assessment</div>
+        <div class="feature-card" onclick="document.getElementById('resources').scrollIntoView()">📚 Resources</div>
+        <div class="feature-card" onclick="document.getElementById('forum').scrollIntoView()">👥 Forum</div>
+        <div class="feature-card" onclick="document.getElementById('admin').scrollIntoView()">📈 Admin</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="container" id="booking">
+    <div class="booking-section">
+      <h2>Book Counselling</h2>
+      <form class="booking-form" onsubmit="submitBooking(event)">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="date" required>
+        <select required><option value="">Select Time</option><option>10 AM</option><option>2 PM</option></select>
+        <textarea placeholder="Describe your concern"></textarea>
+        <button type="submit" class="btn btn-primary">Book</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="container" id="resources">
+    <div class="resources-section">
+      <h2>Resources</h2>
+      <div class="features-grid">
+        <div class="feature-card">🎥 Dealing with Exam Stress (Video)</div>
+        <div class="feature-card">📝 Article: Managing Anxiety</div>
+        <div class="feature-card">🧘 Guided Meditation (Audio)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORUM -->
+  <section class="container" id="forum">
+    <div class="forum-section">
+      <h2>Peer Support Forum</h2>
+      <div id="forum-posts"></div>
+      <textarea id="forum-input" placeholder="Share something..."></textarea>
+      <button onclick="addPost()" class="btn btn-primary">Post</button>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section class="container" id="admin">
+    <div class="admin-section">
+      <h2>Admin Dashboard</h2>
+      <p>Total Bookings: <span id="bookingCount">0</span></p>
+      <p>Assessments Taken: <span id="assessmentCount">0</span></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>About</h3>
+        <p>MindCare is a student-focused mental health support system.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Crisis Helplines</h3>
+        <ul>
+          <li>📞 NIMHANS: 080-4611 0007</li>
+          <li>📞 AASRA: +91-9820466726</li>
+          <li>📞 iCall: +91-9152987821</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;color:gray;">© 2025 MindCare</p>
+  </footer>
+
+  <!-- CHATBOT -->
+  <div class="chatbot-container">
+    <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
+    <div class="chatbot-window" id="chatWindow">
+      <div class="chatbot-messages" id="chatMessages"></div>
+      <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let bookings=0, assessments=0;
+
+    function submitBooking(e){
+      e.preventDefault();
+      bookings++;
+      document.getElementById("bookingCount").innerText=bookings;
+      alert("Booking confirmed!");
+    }
+
+    function startPHQ9(){
+      assessments++;
+      document.getElementById("assessmentCount").innerText=assessments;
+      alert("PHQ-9 Test Started (Demo). Score calculation can be added here.");
+    }
+
+    function toggleChat(){
+      document.getElementById("chatWindow").classList.toggle("active");
+    }
+
+    function sendMessage(){
+      const input=document.getElementById("chatInput");
+      const msg=input.value.trim();
+      if(!msg) return;
+      addMessage(msg,"user");
+      // simple rule-based reply
+      let reply="I'm here to listen.";
+      if(msg.toLowerCase().includes("stress")) reply="Try deep breathing exercises.";
+      if(msg.toLowerCase().includes("sad")) reply="It's okay to feel sad. Talking helps.";
+      if(msg.toLowerCase().includes("exam")) reply="Take short breaks and stay hydrated.";
+      setTimeout(()=>addMessage(reply,"bot"),500);
+      input.value="";
+    }
+
+    function addMessage(text,sender){
+      const div=document.createElement("div");
+      div.className="message "+sender;
+      div.innerText=text;
+      document.getElementById("chatMessages").appendChild(div);
+      div.scrollIntoView();
+    }
+
+    function addPost(){
+      const input=document.getElementById("forum-input");
+      if(!input.value.trim())return;
+      const div=document.createElement("div");
+      div.className="forum-post";
+      div.innerText=input.value;
+      document.getElementById("forum-posts").appendChild(div);
+      input.value="";
+    }
+
+    function showEmergencyModal(){
+      alert("📞 Emergency Helplines:\nNIMHANS: 080-4611 0007\nAASRA: +91-9820466726\n iCall: +91-9152987821");
+    }
+  </script>
+</body>
+</html>
