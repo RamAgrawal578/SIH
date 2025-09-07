@@ -1,193 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindCare - Student Mental Health Support</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare - Home</title>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#a1c4fd,#c2e9fb);color:#374151;line-height:1.6;}
-    .container{max-width:1200px;margin:auto;padding:0 20px;}
-    h1,h2{background:linear-gradient(90deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;text-align:center;}
-    nav{position:fixed;top:0;width:100%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:1000;}
-    .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;}
-    .logo{font-size:1.5rem;font-weight:bold;color:#4f46e5;}
-    .nav-links{display:flex;gap:1rem;}
-    .nav-links a{color:#374151;text-decoration:none;font-weight:500;}
-    .emergency-btn{background:#ef4444;color:#fff;border:none;padding:.5rem 1rem;border-radius:20px;cursor:pointer;}
-    .hero{margin-top:80px;text-align:center;padding:4rem 1rem;color:#fff;}
-    .btn{padding:.8rem 1.6rem;border:none;border-radius:30px;cursor:pointer;font-weight:bold;transition:all .3s;}
-    .btn-primary{background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;box-shadow:0 5px 15px rgba(118,75,162,.3);}
-    .btn-secondary{background:transparent;border:2px solid #fff;color:#fff;}
-    .section{background:#fff;padding:2.5rem;border-radius:25px;margin:2rem 0;box-shadow:0 10px 25px rgba(0,0,0,0.08);text-align:center;}
-    .features-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
-    .feature-card{background:#f9fafb;padding:1.5rem 2rem;border-radius:20px;text-align:center;cursor:pointer;transition:.3s;min-width:200px;}
-    .feature-card:hover{transform:scale(1.05);background:linear-gradient(135deg,#a1c4fd,#c2e9fb);}
-    .booking-form{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;text-align:left;}
-    .booking-form input,.booking-form select,.booking-form textarea{padding:.7rem;border:1px solid #ccc;border-radius:8px;width:100%;}
-    .chatbot-container{position:fixed;bottom:20px;right:20px;}
-    .chatbot-toggle{width:60px;height:60px;border-radius:50%;border:none;background:#4f46e5;color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);}
-    .chatbot-window{display:none;flex-direction:column;position:absolute;bottom:70px;right:0;width:320px;height:420px;background:#fff;border-radius:15px;box-shadow:0 4px 20px rgba(0,0,0,.2);}
-    .chatbot-window.active{display:flex;}
-    .chatbot-messages{flex:1;overflow-y:auto;padding:1rem;}
-    .message{margin-bottom:1rem;}
-    .message.user{text-align:right;}
-    .chatbot-input{display:flex;border-top:1px solid #ccc;}
-    .chatbot-input input{flex:1;padding:.5rem;border:none;outline:none;}
-    .chatbot-input button{padding:.5rem 1rem;border:none;background:#4f46e5;color:#fff;cursor:pointer;}
-    .forum-post{background:#f3f4f6;padding:1rem;margin-bottom:1rem;border-radius:10px;text-align:left;}
-    .admin-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
-    .admin-card{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff;padding:1.5rem;border-radius:15px;text-align:center;min-width:200px;}
-    footer{background:#fff;padding:2rem;margin-top:2rem;border-radius:20px 20px 0 0;text-align:center;}
-    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;}
-    .modal-content{background:#fff;padding:2rem;border-radius:15px;width:90%;max-width:500px;}
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f0f4ff; text-align:center; }
+    nav { background:#4f46e5; color:white; padding:1rem; display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; }
+    nav a { color:white; text-decoration:none; font-weight:bold; }
+    .hero { padding:3rem; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin:2rem; }
+    .card { background:white; padding:1.5rem; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    /* Chatbot */
+    .chatbot { position:fixed; bottom:20px; right:20px; }
+    .chat-window { display:none; background:white; width:300px; height:400px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.3); flex-direction:column; }
+    .chat-header { background:#4f46e5; color:white; padding:0.5rem; }
+    .chat-body { flex:1; overflow-y:auto; padding:0.5rem; text-align:left; }
+    .chat-input { display:flex; }
+    .chat-input input { flex:1; padding:0.5rem; }
+    .chat-input button { padding:0.5rem; }
   </style>
 </head>
 <body>
   <nav>
-    <div class="nav-container">
-      <div class="logo">MindCare</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#assessment">Self-Assessment</a>
-        <a href="#booking">Book Session</a>
-        <a href="#resources">Resources</a>
-        <a href="#forum">Forum</a>
-        <a href="#admin">Admin</a>
-        <button class="emergency-btn" onclick="openEmergency()">🚨 Help</button>
-      </div>
-    </div>
+    <a href="index.html">Home</a>
+    <a href="assessment.html">Assessments</a>
+    <a href="resources.html">Resources</a>
+    <a href="booking.html">Booking</a>
+    <a href="forum.html">Forum</a>
+    <a href="admin.html">Admin</a>
   </nav>
 
-  <section class="hero" id="home">
-    <h1>Your Mental Health Matters</h1>
-    <p>Confidential, accessible and stigma-free support</p>
-    <button class="btn btn-primary" onclick="openPHQ9()">Take PHQ-9 Test</button>
-    <button class="btn btn-secondary" onclick="toggleChat()">Chat with AI</button>
-  </section>
+  <div class="hero">
+    <h1>MindCare</h1>
+    <p>Your Mental Health Matters</p>
+  </div>
 
-  <section class="container section">
-    <h2>Our Services</h2>
-    <div class="features-grid">
-      <div class="feature-card" onclick="toggleChat()">💬 AI Chat</div>
-      <div class="feature-card" onclick="document.getElementById('booking').scrollIntoView()">📅 Book Session</div>
-      <div class="feature-card" onclick="openPHQ9()">📊 Assessment</div>
-      <div class="feature-card" onclick="document.getElementById('resources').scrollIntoView()">📚 Resources</div>
-      <div class="feature-card" onclick="document.getElementById('forum').scrollIntoView()">👥 Forum</div>
-      <div class="feature-card" onclick="document.getElementById('admin').scrollIntoView()">📈 Admin</div>
-    </div>
-  </section>
-
-  <section class="container section" id="booking">
-    <h2>Book Counselling</h2>
-    <form class="booking-form" onsubmit="submitBooking(event)">
-      <input type="text" placeholder="Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="date" required>
-      <select required><option value="">Select Time</option><option>10 AM</option><option>2 PM</option></select>
-      <textarea placeholder="Describe your concern"></textarea>
-      <button type="submit" class="btn btn-primary">Book</button>
-    </form>
-  </section>
-
-  <section class="container section" id="resources">
-    <h2>Resources</h2>
-    <div class="features-grid">
-      <div class="feature-card">🎥 Exam Stress Video</div>
-      <div class="feature-card">📝 Article: Anxiety</div>
-      <div class="feature-card">🧘 Guided Meditation</div>
-    </div>
-  </section>
-
-  <section class="container section" id="forum">
-    <h2>Peer Forum</h2>
-    <div id="forum-posts"></div>
-    <textarea id="forum-input" placeholder="Share something..."></textarea>
-    <button onclick="addPost()" class="btn btn-primary">Post</button>
-  </section>
-
-  <section class="container section" id="admin">
-    <h2>Admin Dashboard</h2>
-    <div class="admin-cards">
-      <div class="admin-card"><h3 id="bookingCount">0</h3><p>Total Bookings</p></div>
-      <div class="admin-card"><h3 id="assessmentCount">0</h3><p>Assessments</p></div>
-      <div class="admin-card"><h3 id="forumCount">0</h3><p>Forum Posts</p></div>
-      <div class="admin-card"><h3 id="chatCount">0</h3><p>Chatbot Messages</p></div>
-    </div>
-  </section>
-
-  <footer>
-    <p>MindCare © 2025 | Built for SIH Prototype</p>
-  </footer>
+  <div class="features">
+    <div class="card">AI Chat Support</div>
+    <div class="card">Book Counselling</div>
+    <div class="card">Self Assessments</div>
+    <div class="card">Resource Library</div>
+    <div class="card">Peer Forum</div>
+    <div class="card">Admin Dashboard</div>
+  </div>
 
   <!-- Chatbot -->
-  <div class="chatbot-container">
-    <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
-    <div class="chatbot-window" id="chatWindow">
-      <div class="chatbot-messages" id="chatMessages"></div>
-      <div class="chatbot-input">
-        <input type="text" id="chatInput" placeholder="Type a message...">
-        <button onclick="sendMessage()">Send</button>
+  <div class="chatbot">
+    <button onclick="toggleChat()">💬 Chat</button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">AI Assistant</div>
+      <div class="chat-body" id="chatBody"></div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask something..."/>
+        <button onclick="sendMsg()">Send</button>
       </div>
     </div>
   </div>
 
-  <!-- Emergency Modal -->
-  <div class="modal" id="emergencyModal"><div class="modal-content"><h2>🚨 Helplines</h2><p>NIMHANS: 080-4611 0007</p><p>AASRA: +91-9820466726</p><p>iCall: +91-9152987821</p><button class="btn btn-primary" onclick="closeEmergency()">Close</button></div></div>
-
-  <!-- PHQ9 Modal -->
-  <div class="modal" id="phq9Modal"><div class="modal-content"><h2>PHQ-9 Test</h2><form id="phq9Form"><p>Answer the following:</p>
-    <select required><option value="0">Little interest in activities</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select>
-    <button type="submit" class="btn btn-primary">Submit</button></form></div></div>
-
-  <script>
-    let bookings=0,assessments=0,posts=0,chats=0;
-
-    function submitBooking(e){e.preventDefault();bookings++;document.getElementById("bookingCount").innerText=bookings;alert("Booking confirmed!");e.target.reset();}
-
-    function addPost(){const input=document.getElementById("forum-input");if(!input.value.trim())return;posts++;document.getElementById("forumCount").innerText=posts;const div=document.createElement("div");div.className="forum-post";div.innerHTML=`<strong>Anon:</strong> ${input.value}`;document.getElementById("forum-posts").appendChild(div);input.value="";}
-
-    function toggleChat(){const chat=document.getElementById("chatWindow");chat.classList.toggle("active");if(chat.classList.contains("active") && document.getElementById("chatMessages").children.length===0){addMessage("Hello! I'm your AI assistant 🤖. Ask me anything about mental health.","bot");}}
-
-    function sendMessage(){const input=document.getElementById("chatInput");const msg=input.value.trim();if(!msg)return;addMessage(msg,"user");chats++;document.getElementById("chatCount").innerText=chats;setTimeout(()=>{addMessage(getBotReply(msg),"bot");},500);input.value="";}
-
-    function addMessage(text,sender){const div=document.createElement("div");div.className="message "+sender;div.innerText=text;document.getElementById("chatMessages").appendChild(div);div.scrollIntoView();}
-
-    // Chatbot replies
-    const responses={
-      happy:["Keep a gratitude list 😊","Listen to your favorite music 🎶","Spend time with friends 👨‍👩‍👧","Go for a walk outside 🌿","Do something creative 🎨","Watch a comedy 😂","Meditate 🧘","Exercise 🏃","Read a good book 📖","Smile in front of mirror 🙂"],
-      stress:["Take deep breaths 🫁","Break tasks into smaller steps 📋","Go for a short walk 🚶","Write down your worries ✍️","Talk to someone 💬","Stretch 🧘","Drink water 💧","Listen to calming music 🎧","Take a power nap 😴","Declutter your desk 🪑"],
-      study:["Use Pomodoro ⏳","Keep your desk clean 🪑","Revise with flashcards 📚","Teach the topic 👩‍🏫","Stay hydrated 💧","Sleep well 😴","Set small goals 🎯","Avoid multitasking ✅","Review past papers 📄","Practice writing ✍️"],
-      sleep:["Keep a bedtime routine 🛏️","Avoid screens before sleep 📵","Drink warm milk 🥛","Meditate 5 minutes 🧘","Dim the lights 💡","Listen to calm music 🎶","Read a book 📖","No caffeine after 6PM ☕","Stretch lightly 🧎","Keep room cool 🌙"],
-      anxiety:["Breathe slowly 🫁","Challenge negative thoughts 💭","Focus on present moment ⏳","Write feelings in journal 📓","Progressive muscle relaxation 💪","Avoid excess caffeine ☕","Talk to trusted friend 👥","Grounding technique: 5-4-3-2-1 👀","Positive affirmations ✨","Limit news/social media 📵"],
-      sad:["Listen to happy songs 🎶","Call a friend 📞","Go outside 🌞","Draw or write 🎨","Exercise 🏃","Watch funny videos 😂","Practice gratitude 🙏","Cry if you need to 😢","Pet an animal 🐶","Cook something tasty 🍲"],
-      confidence:["Stand tall 💪","Prepare before speaking 📖","Positive self-talk ✨","Learn new skill 🧑‍💻","Dress nicely 👔","Smile often 🙂","Remember past successes 🏆","Face small fears 🎯","Exercise regularly 🏃","Avoid negative people 🚫"],
-      motivation:["Remember your why 💡","Break big goal into steps 🪜","Visualize success 🎯","Reward yourself 🎁","Read motivational quotes 📖","Follow role models 🌟","Track progress 📊","Stay consistent ⏳","Take small wins 🏆","Remove distractions 🚫"],
-      exam:["Start revision early 📅","Make a timetable 🕒","Practice past papers 📄","Eat healthy 🥗","Get enough sleep 😴","Avoid last-minute cramming 🚫","Group study 👥","Highlight key points 🖊️","Stay hydrated 💧","Stay calm during exam 😌"],
-      health:["Eat balanced diet 🥗","Drink 8 glasses water 💧","Exercise daily 🏃","Sleep 7-8 hours 🛏️","Avoid junk food 🍟","Take short breaks ⏳","Stay socially connected 👥","Limit screen time 📵","Regular checkups 🩺","Practice meditation 🧘"]
-    };
-
-    function getBotReply(msg){
-      msg=msg.toLowerCase();
-      if(msg.includes("happy"))return randomReply(responses.happy);
-      if(msg.includes("stress"))return randomReply(responses.stress);
-      if(msg.includes("study")||msg.includes("focus"))return randomReply(responses.study);
-      if(msg.includes("sleep"))return randomReply(responses.sleep);
-      if(msg.includes("anxiety"))return randomReply(responses.anxiety);
-      if(msg.includes("sad"))return randomReply(responses.sad);
-      if(msg.includes("confidence"))return randomReply(responses.confidence);
-      if(msg.includes("motivation"))return randomReply(responses.motivation);
-      if(msg.includes("exam"))return randomReply(responses.exam);
-      if(msg.includes("health"))return randomReply(responses.health);
-      return "I understand 💙. You're not alone—try sharing more about how you feel.";
-    }
-    function randomReply(arr){return arr[Math.floor(Math.random()*arr.length)];}
-
-    function openEmergency(){document.getElementById("emergencyModal").style.display="flex";}
-    function closeEmergency(){document.getElementById("emergencyModal").style.display="none";}
-    function openPHQ9(){document.getElementById("phq9Modal").style.display="flex";}
-    document.getElementById("phq9Form").addEventListener("submit",function(e){e.preventDefault();assessments++;document.getElementById("assessmentCount").innerText=assessments;alert("Your response has been recorded.");document.getElementById("phq9Modal").style.display="none";this.reset();});
-    window.onclick=function(e){if(e.target.classList.contains("modal"))e.target.style.display="none";}
-  </script>
+<script>
+  const faqs = {
+    "hello":"Hi! I'm your mental health assistant.",
+    "how to be happy":"Practice gratitude, exercise, connect with friends.",
+    "stress relief":"Try deep breathing, short walks, or meditation.",
+    "exam stress":"Make a timetable, take breaks, avoid all-nighters.",
+    "anxiety":"Breathe deeply, write down your thoughts, talk to someone.",
+    "suicidal":"Please reach out immediately: Helpline 9152987821"
+  };
+  function toggleChat(){document.getElementById('chatWindow').style.display='flex';}
+  function sendMsg(){
+    let input=document.getElementById('chatInput').value.toLowerCase();
+    let body=document.getElementById('chatBody');
+    body.innerHTML += "<div><b>You:</b> "+input+"</div>";
+    let reply=faqs[input]||"Sorry, I don't know that yet.";
+    body.innerHTML += "<div><b>Bot:</b> "+reply+"</div>";
+    document.getElementById('chatInput').value="";
+    localStorage.setItem('chatCount', (parseInt(localStorage.getItem('chatCount')||0)+1));
+  }
+</script>
 </body>
 </html>

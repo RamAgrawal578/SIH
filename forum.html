@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Forum</title></head>
+<body>
+<h1>Peer Support Forum</h1>
+<div id="posts"></div>
+<form onsubmit="addPost(event)">
+<input id="postText" placeholder="Write something" required>
+<button>Post</button>
+</form>
+<script>
+function addPost(e){
+ e.preventDefault();
+ let txt=document.getElementById('postText').value;
+ document.getElementById('posts').innerHTML+="<p>"+txt+"</p>";
+ localStorage.setItem('forumCount', (parseInt(localStorage.getItem('forumCount')||0)+1));
+ document.getElementById('postText').value="";
+}
+</script>
+</body>
+</html>

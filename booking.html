@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Booking</title></head>
+<body>
+<h1>Book Counselling Session</h1>
+<form onsubmit="saveBooking(event)">
+<input placeholder="Name" required><br>
+<input placeholder="Email" required><br>
+<input type="date" required><br>
+<button type="submit">Book</button>
+</form>
+<script>
+function saveBooking(e){
+ e.preventDefault();
+ alert("Booking confirmed!");
+ localStorage.setItem('bookingCount', (parseInt(localStorage.getItem('bookingCount')||0)+1));
+}
+</script>
+</body>
+</html>

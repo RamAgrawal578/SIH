@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Admin Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
+<body>
+<h1>Admin Dashboard</h1>
+<div>
+<p>Bookings: <span id="book"></span></p>
+<p>Assessments: <span id="assess"></span></p>
+<p>Forum Posts: <span id="forum"></span></p>
+<p>Chat Sessions: <span id="chat"></span></p>
+</div>
+<canvas id="chart" width="400" height="200"></canvas>
+<script>
+let b=parseInt(localStorage.getItem('bookingCount')||0);
+let a=parseInt(localStorage.getItem('assessmentCount')||0);
+let f=parseInt(localStorage.getItem('forumCount')||0);
+let c=parseInt(localStorage.getItem('chatCount')||0);
+document.getElementById('book').innerText=b;
+document.getElementById('assess').innerText=a;
+document.getElementById('forum').innerText=f;
+document.getElementById('chat').innerText=c;
+
+new Chart(document.getElementById('chart'), {
+ type:'bar',
+ data:{ labels:['Bookings','Assessments','Forum','Chat'],
+ datasets:[{label:'Usage', data:[b,a,f,c], backgroundColor:['#4f46e5','#10b981','#f59e0b','#ef4444']}]}
+});
+</script>
+</body>
+</html>

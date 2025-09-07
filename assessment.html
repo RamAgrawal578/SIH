@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assessments</title>
+</head>
+<body>
+<h1>Self Assessments</h1>
+
+<h2>PHQ-9 Depression Test</h2>
+<form onsubmit="phq9(event)">
+  <p>Answer 9 questions with 0-3 (0=Not at all, 3=Nearly every day)</p>
+  <input type="number" id="phq" max="27" min="0" placeholder="Enter total score">
+  <button>Submit</button>
+</form>
+<div id="phqResult"></div>
+
+<h2>GAD-7 Anxiety Test</h2>
+<form onsubmit="gad7(event)">
+  <input type="number" id="gad" max="21" min="0" placeholder="Enter total score">
+  <button>Submit</button>
+</form>
+<div id="gadResult"></div>
+
+<script>
+function phq9(e){
+ e.preventDefault();
+ let score=parseInt(document.getElementById('phq').value);
+ let res="";
+ if(score<=4) res="Minimal depression";
+ else if(score<=9) res="Mild depression";
+ else if(score<=14) res="Moderate depression";
+ else if(score<=19) res="Moderately severe depression";
+ else res="Severe depression";
+ document.getElementById('phqResult').innerText="Result: "+res;
+ localStorage.setItem('assessmentCount', (parseInt(localStorage.getItem('assessmentCount')||0)+1));
+}
+function gad7(e){
+ e.preventDefault();
+ let score=parseInt(document.getElementById('gad').value);
+ let res="";
+ if(score<=4) res="Minimal anxiety";
+ else if(score<=9) res="Mild anxiety";
+ else if(score<=14) res="Moderate anxiety";
+ else res="Severe anxiety";
+ document.getElementById('gadResult').innerText="Result: "+res;
+ localStorage.setItem('assessmentCount', (parseInt(localStorage.getItem('assessmentCount')||0)+1));
+}
+</script>
+</body>
+</html>
