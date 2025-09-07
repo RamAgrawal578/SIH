@@ -1,72 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MindCare - Student Mental Health Support</title>
   <style>
-    /* ===== GLOBAL ===== */
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(120deg,#a1c4fd,#c2e9fb);
-      color:#374151;
-      line-height:1.6;
-    }
+    body{font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#a1c4fd,#c2e9fb);color:#374151;line-height:1.6;}
     .container{max-width:1200px;margin:auto;padding:0 20px;}
-    h1,h2{
-      background:linear-gradient(90deg,#667eea,#764ba2);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      margin-bottom:1rem;
-    }
-
-    /* ===== NAVBAR ===== */
+    h1,h2{background:linear-gradient(90deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;text-align:center;}
     nav{position:fixed;top:0;width:100%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:1000;}
     .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;}
     .logo{font-size:1.5rem;font-weight:bold;color:#4f46e5;}
     .nav-links{display:flex;gap:1rem;}
     .nav-links a{color:#374151;text-decoration:none;font-weight:500;}
     .emergency-btn{background:#ef4444;color:#fff;border:none;padding:.5rem 1rem;border-radius:20px;cursor:pointer;}
-    .hamburger{display:none;font-size:1.5rem;cursor:pointer;}
-    @media(max-width:768px){
-      .nav-links{display:none;flex-direction:column;position:absolute;top:60px;right:10px;background:#fff;padding:1rem;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.2);}
-      .nav-links.active{display:flex;}
-      .hamburger{display:block;}
-    }
-
-    /* ===== HERO ===== */
     .hero{margin-top:80px;text-align:center;padding:4rem 1rem;color:#fff;}
-    .btn{padding:.8rem 1.6rem;border:none;border-radius:30px;cursor:pointer;font-weight:bold;transition:all 0.3s;}
-    .btn-primary{background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;box-shadow:0 5px 15px rgba(118,75,162,0.3);}
-    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(118,75,162,0.5);}
+    .btn{padding:.8rem 1.6rem;border:none;border-radius:30px;cursor:pointer;font-weight:bold;transition:all .3s;}
+    .btn-primary{background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;box-shadow:0 5px 15px rgba(118,75,162,.3);}
     .btn-secondary{background:transparent;border:2px solid #fff;color:#fff;}
-    .btn-secondary:hover{background:#fff;color:#4f46e5;}
-
-    /* ===== SECTIONS ===== */
-    .section{
-      background:#fff;
-      padding:2.5rem;
-      border-radius:25px;
-      margin:2rem 0;
-      box-shadow:0 10px 25px rgba(0,0,0,0.08);
-      text-align:center;
-    }
-
-    /* Features */
-    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
-    .feature-card{
-      background:#f9fafb;padding:1.5rem;border-radius:20px;text-align:center;cursor:pointer;transition:.3s;
-    }
-    .feature-card:hover{transform:scale(1.05);background:linear-gradient(135deg,#a1c4fd,#c2e9fb);color:#000;}
-
-    /* Booking */
-    .booking-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;text-align:left;}
+    .section{background:#fff;padding:2.5rem;border-radius:25px;margin:2rem 0;box-shadow:0 10px 25px rgba(0,0,0,0.08);text-align:center;}
+    .features-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
+    .feature-card{background:#f9fafb;padding:1.5rem 2rem;border-radius:20px;text-align:center;cursor:pointer;transition:.3s;min-width:200px;}
+    .feature-card:hover{transform:scale(1.05);background:linear-gradient(135deg,#a1c4fd,#c2e9fb);}
+    .booking-form{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;text-align:left;}
     .booking-form input,.booking-form select,.booking-form textarea{padding:.7rem;border:1px solid #ccc;border-radius:8px;width:100%;}
-
-    /* Chatbot */
     .chatbot-container{position:fixed;bottom:20px;right:20px;}
-    .chatbot-toggle{width:60px;height:60px;border-radius:50%;border:none;background:#4f46e5;color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+    .chatbot-toggle{width:60px;height:60px;border-radius:50%;border:none;background:#4f46e5;color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);}
     .chatbot-window{display:none;flex-direction:column;position:absolute;bottom:70px;right:0;width:320px;height:420px;background:#fff;border-radius:15px;box-shadow:0 4px 20px rgba(0,0,0,.2);}
     .chatbot-window.active{display:flex;}
     .chatbot-messages{flex:1;overflow-y:auto;padding:1rem;}
@@ -75,32 +35,19 @@
     .chatbot-input{display:flex;border-top:1px solid #ccc;}
     .chatbot-input input{flex:1;padding:.5rem;border:none;outline:none;}
     .chatbot-input button{padding:.5rem 1rem;border:none;background:#4f46e5;color:#fff;cursor:pointer;}
-
-    /* Forum */
     .forum-post{background:#f3f4f6;padding:1rem;margin-bottom:1rem;border-radius:10px;text-align:left;}
-
-    /* Admin */
-    .admin-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
-    .admin-card{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff;padding:1.5rem;border-radius:15px;text-align:center;}
-    .admin-card h3{font-size:2rem;}
-
-    /* Footer */
-    footer{background:#fff;padding:2rem;margin-top:2rem;border-radius:20px 20px 0 0;}
-    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
-    .footer-section ul{list-style:none;}
-
-    /* Modal */
+    .admin-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
+    .admin-card{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff;padding:1.5rem;border-radius:15px;text-align:center;min-width:200px;}
+    footer{background:#fff;padding:2rem;margin-top:2rem;border-radius:20px 20px 0 0;text-align:center;}
     .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;}
     .modal-content{background:#fff;padding:2rem;border-radius:15px;width:90%;max-width:500px;}
   </style>
 </head>
 <body>
-  <!-- NAV -->
   <nav>
     <div class="nav-container">
       <div class="logo">MindCare</div>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <div class="nav-links" id="navLinks">
+      <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#assessment">Self-Assessment</a>
         <a href="#booking">Book Session</a>
@@ -112,7 +59,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero" id="home">
     <h1>Your Mental Health Matters</h1>
     <p>Confidential, accessible and stigma-free support</p>
@@ -120,7 +66,6 @@
     <button class="btn btn-secondary" onclick="toggleChat()">Chat with AI</button>
   </section>
 
-  <!-- FEATURES -->
   <section class="container section">
     <h2>Our Services</h2>
     <div class="features-grid">
@@ -133,7 +78,6 @@
     </div>
   </section>
 
-  <!-- BOOKING -->
   <section class="container section" id="booking">
     <h2>Book Counselling</h2>
     <form class="booking-form" onsubmit="submitBooking(event)">
@@ -146,7 +90,6 @@
     </form>
   </section>
 
-  <!-- RESOURCES -->
   <section class="container section" id="resources">
     <h2>Resources</h2>
     <div class="features-grid">
@@ -156,7 +99,6 @@
     </div>
   </section>
 
-  <!-- FORUM -->
   <section class="container section" id="forum">
     <h2>Peer Forum</h2>
     <div id="forum-posts"></div>
@@ -164,35 +106,21 @@
     <button onclick="addPost()" class="btn btn-primary">Post</button>
   </section>
 
-  <!-- ADMIN -->
   <section class="container section" id="admin">
     <h2>Admin Dashboard</h2>
     <div class="admin-cards">
       <div class="admin-card"><h3 id="bookingCount">0</h3><p>Total Bookings</p></div>
       <div class="admin-card"><h3 id="assessmentCount">0</h3><p>Assessments</p></div>
+      <div class="admin-card"><h3 id="forumCount">0</h3><p>Forum Posts</p></div>
+      <div class="admin-card"><h3 id="chatCount">0</h3><p>Chatbot Messages</p></div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="container footer-content">
-      <div class="footer-section">
-        <h3>About</h3>
-        <p>MindCare is a student-focused mental health support system.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Crisis Helplines</h3>
-        <ul>
-          <li>📞 NIMHANS: 080-4611 0007</li>
-          <li>📞 AASRA: +91-9820466726</li>
-          <li>📞 iCall: +91-9152987821</li>
-        </ul>
-      </div>
-    </div>
-    <p style="text-align:center;color:gray;">© 2025 MindCare</p>
+    <p>MindCare © 2025 | Built for SIH Prototype</p>
   </footer>
 
-  <!-- CHATBOT -->
+  <!-- Chatbot -->
   <div class="chatbot-container">
     <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
     <div class="chatbot-window" id="chatWindow">
@@ -204,113 +132,62 @@
     </div>
   </div>
 
-  <!-- EMERGENCY MODAL -->
-  <div class="modal" id="emergencyModal">
-    <div class="modal-content">
-      <h2>🚨 Emergency Helplines</h2>
-      <p>📞 NIMHANS: 080-4611 0007</p>
-      <p>📞 AASRA: +91-9820466726</p>
-      <p>📞 iCall: +91-9152987821</p>
-      <button class="btn btn-primary" onclick="closeEmergency()">Close</button>
-    </div>
-  </div>
+  <!-- Emergency Modal -->
+  <div class="modal" id="emergencyModal"><div class="modal-content"><h2>🚨 Helplines</h2><p>NIMHANS: 080-4611 0007</p><p>AASRA: +91-9820466726</p><p>iCall: +91-9152987821</p><button class="btn btn-primary" onclick="closeEmergency()">Close</button></div></div>
 
-  <!-- PHQ-9 MODAL -->
-  <div class="modal" id="phq9Modal">
-    <div class="modal-content">
-      <h2>PHQ-9 Test</h2>
-      <form id="phq9Form">
-        <p>Over the last 2 weeks, how often have you been bothered by the following?</p>
-        <div><label>1. Little interest or pleasure in doing things</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>2. Feeling down, depressed, or hopeless</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>3. Trouble sleeping</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>4. Feeling tired or little energy</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>5. Poor appetite or overeating</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>6. Feeling bad about yourself</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>7. Trouble concentrating</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>8. Moving/speaking slowly or too fast</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <div><label>9. Thoughts that you would be better off dead</label><br><select required><option value="0">Not at all</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select></div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </div>
+  <!-- PHQ9 Modal -->
+  <div class="modal" id="phq9Modal"><div class="modal-content"><h2>PHQ-9 Test</h2><form id="phq9Form"><p>Answer the following:</p>
+    <select required><option value="0">Little interest in activities</option><option value="1">Several days</option><option value="2">More than half</option><option value="3">Nearly every day</option></select>
+    <button type="submit" class="btn btn-primary">Submit</button></form></div></div>
 
   <script>
-    let bookings=0,assessments=0;
+    let bookings=0,assessments=0,posts=0,chats=0;
 
-    // Navbar toggle
-    function toggleMenu(){document.getElementById("navLinks").classList.toggle("active");}
+    function submitBooking(e){e.preventDefault();bookings++;document.getElementById("bookingCount").innerText=bookings;alert("Booking confirmed!");e.target.reset();}
 
-    // Booking
-    function submitBooking(e){
-      e.preventDefault();
-      bookings++;
-      document.getElementById("bookingCount").innerText=bookings;
-      alert("Booking confirmed!");
-      e.target.reset();
-    }
+    function addPost(){const input=document.getElementById("forum-input");if(!input.value.trim())return;posts++;document.getElementById("forumCount").innerText=posts;const div=document.createElement("div");div.className="forum-post";div.innerHTML=`<strong>Anon:</strong> ${input.value}`;document.getElementById("forum-posts").appendChild(div);input.value="";}
 
-    // Forum
-    function addPost(){
-      const input=document.getElementById("forum-input");
-      if(!input.value.trim())return;
-      const div=document.createElement("div");
-      div.className="forum-post";
-      const time=new Date().toLocaleTimeString();
-      div.innerHTML=`<strong>Anon:</strong> ${input.value} <br><small>${time}</small>`;
-      document.getElementById("forum-posts").appendChild(div);
-      input.value="";
-    }
+    function toggleChat(){const chat=document.getElementById("chatWindow");chat.classList.toggle("active");if(chat.classList.contains("active") && document.getElementById("chatMessages").children.length===0){addMessage("Hello! I'm your AI assistant 🤖. Ask me anything about mental health.","bot");}}
 
-    // Chatbot
-    function toggleChat(){
-      const chat=document.getElementById("chatWindow");
-      chat.classList.toggle("active");
-      if(chat.classList.contains("active") && document.getElementById("chatMessages").children.length===0){
-        addMessage("Hello! I'm your AI assistant. How are you feeling today?","bot");
-      }
-    }
-    function sendMessage(){
-      const input=document.getElementById("chatInput");
-      const msg=input.value.trim(); if(!msg)return;
-      addMessage(msg,"user");
-      let reply="I'm here to listen.";
-      if(msg.toLowerCase().includes("stress")) reply="Try deep breathing exercises.";
-      if(msg.toLowerCase().includes("sad")) reply="It's okay to feel sad. Talking helps.";
-      if(msg.toLowerCase().includes("exam")) reply="Take short breaks and stay hydrated.";
-      setTimeout(()=>addMessage(reply,"bot"),500);
-      input.value="";
-    }
-    function addMessage(text,sender){
-      const div=document.createElement("div");
-      div.className="message "+sender;
-      div.innerText=text;
-      document.getElementById("chatMessages").appendChild(div);
-      div.scrollIntoView();
-    }
+    function sendMessage(){const input=document.getElementById("chatInput");const msg=input.value.trim();if(!msg)return;addMessage(msg,"user");chats++;document.getElementById("chatCount").innerText=chats;setTimeout(()=>{addMessage(getBotReply(msg),"bot");},500);input.value="";}
 
-    // Emergency
+    function addMessage(text,sender){const div=document.createElement("div");div.className="message "+sender;div.innerText=text;document.getElementById("chatMessages").appendChild(div);div.scrollIntoView();}
+
+    // Chatbot replies
+    const responses={
+      happy:["Keep a gratitude list 😊","Listen to your favorite music 🎶","Spend time with friends 👨‍👩‍👧","Go for a walk outside 🌿","Do something creative 🎨","Watch a comedy 😂","Meditate 🧘","Exercise 🏃","Read a good book 📖","Smile in front of mirror 🙂"],
+      stress:["Take deep breaths 🫁","Break tasks into smaller steps 📋","Go for a short walk 🚶","Write down your worries ✍️","Talk to someone 💬","Stretch 🧘","Drink water 💧","Listen to calming music 🎧","Take a power nap 😴","Declutter your desk 🪑"],
+      study:["Use Pomodoro ⏳","Keep your desk clean 🪑","Revise with flashcards 📚","Teach the topic 👩‍🏫","Stay hydrated 💧","Sleep well 😴","Set small goals 🎯","Avoid multitasking ✅","Review past papers 📄","Practice writing ✍️"],
+      sleep:["Keep a bedtime routine 🛏️","Avoid screens before sleep 📵","Drink warm milk 🥛","Meditate 5 minutes 🧘","Dim the lights 💡","Listen to calm music 🎶","Read a book 📖","No caffeine after 6PM ☕","Stretch lightly 🧎","Keep room cool 🌙"],
+      anxiety:["Breathe slowly 🫁","Challenge negative thoughts 💭","Focus on present moment ⏳","Write feelings in journal 📓","Progressive muscle relaxation 💪","Avoid excess caffeine ☕","Talk to trusted friend 👥","Grounding technique: 5-4-3-2-1 👀","Positive affirmations ✨","Limit news/social media 📵"],
+      sad:["Listen to happy songs 🎶","Call a friend 📞","Go outside 🌞","Draw or write 🎨","Exercise 🏃","Watch funny videos 😂","Practice gratitude 🙏","Cry if you need to 😢","Pet an animal 🐶","Cook something tasty 🍲"],
+      confidence:["Stand tall 💪","Prepare before speaking 📖","Positive self-talk ✨","Learn new skill 🧑‍💻","Dress nicely 👔","Smile often 🙂","Remember past successes 🏆","Face small fears 🎯","Exercise regularly 🏃","Avoid negative people 🚫"],
+      motivation:["Remember your why 💡","Break big goal into steps 🪜","Visualize success 🎯","Reward yourself 🎁","Read motivational quotes 📖","Follow role models 🌟","Track progress 📊","Stay consistent ⏳","Take small wins 🏆","Remove distractions 🚫"],
+      exam:["Start revision early 📅","Make a timetable 🕒","Practice past papers 📄","Eat healthy 🥗","Get enough sleep 😴","Avoid last-minute cramming 🚫","Group study 👥","Highlight key points 🖊️","Stay hydrated 💧","Stay calm during exam 😌"],
+      health:["Eat balanced diet 🥗","Drink 8 glasses water 💧","Exercise daily 🏃","Sleep 7-8 hours 🛏️","Avoid junk food 🍟","Take short breaks ⏳","Stay socially connected 👥","Limit screen time 📵","Regular checkups 🩺","Practice meditation 🧘"]
+    };
+
+    function getBotReply(msg){
+      msg=msg.toLowerCase();
+      if(msg.includes("happy"))return randomReply(responses.happy);
+      if(msg.includes("stress"))return randomReply(responses.stress);
+      if(msg.includes("study")||msg.includes("focus"))return randomReply(responses.study);
+      if(msg.includes("sleep"))return randomReply(responses.sleep);
+      if(msg.includes("anxiety"))return randomReply(responses.anxiety);
+      if(msg.includes("sad"))return randomReply(responses.sad);
+      if(msg.includes("confidence"))return randomReply(responses.confidence);
+      if(msg.includes("motivation"))return randomReply(responses.motivation);
+      if(msg.includes("exam"))return randomReply(responses.exam);
+      if(msg.includes("health"))return randomReply(responses.health);
+      return "I understand 💙. You're not alone—try sharing more about how you feel.";
+    }
+    function randomReply(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
     function openEmergency(){document.getElementById("emergencyModal").style.display="flex";}
     function closeEmergency(){document.getElementById("emergencyModal").style.display="none";}
-
-    // PHQ-9
     function openPHQ9(){document.getElementById("phq9Modal").style.display="flex";}
-    document.getElementById("phq9Form").addEventListener("submit",function(e){
-      e.preventDefault();
-      let score=0;
-      Array.from(this.querySelectorAll("select")).forEach(sel=>score+=parseInt(sel.value));
-      assessments++;
-      document.getElementById("assessmentCount").innerText=assessments;
-      let level="Minimal";
-      if(score>=5 && score<=9) level="Mild";
-      else if(score<=14) level="Moderate";
-      else if(score<=19) level="Moderately Severe";
-      else if(score>=20) level="Severe";
-      alert("Your PHQ-9 Score: "+score+" ("+level+")\nConsider booking a session for support.");
-      document.getElementById("phq9Modal").style.display="none";
-      this.reset();
-    });
-    window.onclick=function(e){if(e.target.classList.contains("modal")) e.target.style.display="none";}
+    document.getElementById("phq9Form").addEventListener("submit",function(e){e.preventDefault();assessments++;document.getElementById("assessmentCount").innerText=assessments;alert("Your response has been recorded.");document.getElementById("phq9Modal").style.display="none";this.reset();});
+    window.onclick=function(e){if(e.target.classList.contains("modal"))e.target.style.display="none";}
   </script>
 </body>
 </html>
